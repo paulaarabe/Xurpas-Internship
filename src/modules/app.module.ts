@@ -9,6 +9,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { I18nJsonParser, I18nModule } from 'nestjs-i18n';
 import { join } from 'path';
+import { UserModule } from './user/user.module';
 import { TodosModule } from '../todos/module/todos.module';
 
 @Module({
@@ -27,6 +28,7 @@ import { TodosModule } from '../todos/module/todos.module';
       },
     }),
     TodosModule,
+    UserModule,
     
   ],
   providers: [
