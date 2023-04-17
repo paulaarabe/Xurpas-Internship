@@ -16,39 +16,56 @@ export class UsersTable1681372938520 implements MigrationInterface {
                   isGenerated: true,
                 },
                 {
-                  name: 'title',
+                  name: 'email',
+                  type: 'varchar',
+                  length: '255',
+                  isNullable: false,
+                  isUnique: true,
+                },
+                {
+                  name: 'password',
                   type: 'varchar',
                   length: '255',
                   isNullable: false,
                 },
                 {
-                  name: 'description',
+                  name: 'user_type',
                   type: 'varchar',
-                  length: '1000',
-                  isNullable: true,
+                  length: '255',
+                  isNullable: false,
                 },
                 {
-                    name: 'completed',
-                    type: 'boolean',
-                    default: false,
-                    isNullable: false,
-                  },
-              
+                  name: 'first_name',
+                  type: 'varchar',
+                  length: '255',
+                  isNullable: false,
+                },
+                {
+                  name: 'last_name',
+                  type: 'varchar',
+                  length: '255',
+                  isNullable: false,
+                },
+                {
+                  name: 'address',
+                  type: 'varchar',
+                  length: '255',
+                  isNullable: false,
+                },
               ],
             }),
           );
       
           await queryRunner.createIndex(
-            'todos',
+            'users',
             new TableIndex({
-              name: 'IDX_TODOS_TABLE',
+              name: 'IDX_USERS_TABLE',
               columnNames: ['id'],
             }),
           );
-      
     }
-
     public async down(queryRunner: QueryRunner): Promise<void> {
+      await queryRunner.dropIndex('users','IDX_USERS_TABLE')
+      await queryRunner.dropTable('users')
     }
-
 }
