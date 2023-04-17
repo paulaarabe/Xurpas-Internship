@@ -2,22 +2,18 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 
-@ObjectType()
 @Entity('subject')
 export class SubjectEntity  {
-  @Field()
+  @Column()
   @PrimaryGeneratedColumn('increment') 
-  subject_id: number;
+  id: number;
   
-  @Field()
-  @Column({ nullable: true })
+  @Column({name:'subject_name', nullable: true })
   subject_name: string;
 
-  @Field()
-  @Column({ default: false })
+  @Column({ name:'description',nullable:true })
   description: string;
   
-  @Field()
-  @Column({ nullable: true })
+  @Column({name:'subject_status', nullable: true })
   subject_status: string;
 }

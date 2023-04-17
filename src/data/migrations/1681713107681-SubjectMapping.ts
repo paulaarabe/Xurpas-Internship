@@ -19,7 +19,6 @@ export class SubjectMappingTable1681713107681 implements MigrationInterface {
                     {
                         name:'user_id',
                         type:'uuid',
-                        length:'1000',
                         isNullable:false,
                     },
                     {
@@ -33,7 +32,7 @@ export class SubjectMappingTable1681713107681 implements MigrationInterface {
         await queryRunner.createIndex(
             'subject_mapping',
             new TableIndex({
-              name: 'IDX_SUBJECT_TABLE',
+              name: 'IDX_SUBJECT_MAPPING_TABLE',
               columnNames: ['id'],
             }),
         );
@@ -64,7 +63,7 @@ export class SubjectMappingTable1681713107681 implements MigrationInterface {
     public async down(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.dropForeignKey('subject_mapping','FK_SUBJECT');
         await queryRunner.dropForeignKey('subject_mapping','FK_USER');
-        await queryRunner.dropIndex('subject_mapping','IDX_SUBJECT_TABLE');
+        await queryRunner.dropIndex('subject_mapping','IDX_SUBJECT_MAPPING_TABLE');
         await queryRunner.dropTable('subject_mapping');
     }
 

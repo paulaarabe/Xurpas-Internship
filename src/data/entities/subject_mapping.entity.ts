@@ -6,7 +6,7 @@ import { Column, Entity, PrimaryGeneratedColumn,OneToOne,JoinColumn,ManyToOne,Ma
 
 @Entity('subject_mapping')
 export class SubjectMappingEntity  {
-
+    @Column({name:'id'})
     @PrimaryGeneratedColumn('increment') 
     id: number;
 
@@ -24,7 +24,7 @@ export class SubjectMappingEntity  {
     subjectId: string;
     @OneToOne(
         () => SubjectEntity,
-        (subject_mapping) => subject_mapping.subject_id,
+        (subject_mapping) => subject_mapping.id,
         { cascade: true },
     )
     @JoinColumn({ name: 'subject_id' })
