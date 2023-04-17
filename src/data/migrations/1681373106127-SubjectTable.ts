@@ -10,7 +10,7 @@ export class SubjectTable1681373106127 implements MigrationInterface {
                 name : 'subject',
                 columns: [
                     {
-                        name:'subject_id',
+                        name:'id',
                         type:'int',
                         isPrimary:true,
                         generationStrategy: 'increment',
@@ -38,16 +38,19 @@ export class SubjectTable1681373106127 implements MigrationInterface {
             }),
         );
         
-        /*await queryRunner.createIndex(
+        await queryRunner.createIndex(
             'subject',
             new TableIndex({
-              name: 'IDX_SUBJECTS_TABLE',
+              name: 'IDX_SUBJECT_TABLE',
               columnNames: ['id'],
             }),
-          );*/
+        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.dropIndex('subject','IDX_SUBJECT_TABLE');
+        await queryRunner.dropTable('subject');
     }
+
 
 }

@@ -65,7 +65,7 @@ export class UsersTable1681372938520 implements MigrationInterface {
           );
     }
     public async down(queryRunner: QueryRunner): Promise<void> {
-      await queryRunner.dropIndex('users','IDX_USERS_TABLE')
-      await queryRunner.dropTable('users')
+      await queryRunner.dropIndex('users','IDX_USERS_TABLE');
+      await queryRunner.dropTable('users');
     }
 }

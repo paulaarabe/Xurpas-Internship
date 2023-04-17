@@ -23,15 +23,30 @@ export class toDoTable1679473269918 implements MigrationInterface {
                 {
                   name: 'description',
                   type: 'varchar',
-                  length: '1000',
+                  length: '1500',
                   isNullable: true,
                 },
                 {
-                  name: 'completed',
-                  type: 'boolean',
-                  default: false,
+                  name: 'dateCreated',
+                  type: 'date',
                   isNullable: false,
                 },
+                {
+                  name: 'dateUpdated',
+                  type: 'date',
+                  isNullable: false,
+                },
+                {
+                  name: 'dueDate',
+                  type: 'date',
+                  isNullable: false,
+                },
+                {
+                    name: 'completed',
+                    type: 'boolean',
+                    default: false,
+                    isNullable: false,
+                  },
               
               ],
             }),

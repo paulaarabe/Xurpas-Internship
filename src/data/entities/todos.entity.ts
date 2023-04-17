@@ -1,26 +1,34 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@ObjectType()
-@Entity('todos')
-export class TodosEntity  {
-  @Field()
-  @PrimaryGeneratedColumn('increment') 
+@ObjectType() 
+@Entity()
+export class TodosEntity {
+  @Field(() => Int) 
+  @PrimaryGeneratedColumn()
   id: number;
-  
-  @Field()
-  @Column({ nullable: true })
-  title: string;
 
   @Field()
-  @Column({ default: false })
-  completed: boolean;
-  
-  @Field()
-  @Column({ nullable: true })
+  @Column()
+  title: string;
+
+  @Field() 
+  @Column()
   description: string;
 
   @Field()
-  @Column({ nullable: false })
-  dueDate: Date;
+  @Column()
+  dateCreated: Date;
+
+  @Field() 
+  @Column()
+  dateUpdated: Date;
+
+  @Field() 
+  @Column({ default: false })
+  isCompleted: boolean;
+
+  @Field({ nullable: true }) 
+  @Column({ nullable: true })
+  dueDate: Date; 
 }

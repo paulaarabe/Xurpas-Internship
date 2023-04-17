@@ -23,13 +23,13 @@ export class TodosRepository extends Repository<TodosEntity> {
     return this.find();
   }
   
-  async findCompleted(): Promise<TodosEntity[]> {
+  /*async findCompleted(): Promise<TodosEntity[]> {
     return this.find({ where: { completed: true } });
-  }
+  }*/
 
-  async findPending(): Promise<TodosEntity[]> {
+  /*async findPending(): Promise<TodosEntity[]> {
     return this.find({ where: { completed: false } });
-  }
+  }*/
 
   
 }

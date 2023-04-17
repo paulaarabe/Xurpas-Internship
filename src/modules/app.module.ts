@@ -9,7 +9,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { I18nJsonParser, I18nModule } from 'nestjs-i18n';
 import { join } from 'path';
-import { TodosModule } from '../todos/module/todos.module';
+import { TodosModule } from './todos/todos.module';
 
 @Module({
   imports: [

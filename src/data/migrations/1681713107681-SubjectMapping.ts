@@ -2,12 +2,12 @@ import { table } from "console";
 import { type } from "os";
 import {  MigrationInterface, QueryRunner, Table, TableIndex,TableForeignKey} from "typeorm"
 
-export class SubjectTable1681373106127 implements MigrationInterface {
+export class SubjectMappingTable1681713107681 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name : 'subject',
+                name : 'subject_mapping',
                 columns: [
                     {
                         name:'id',
@@ -18,22 +18,54 @@ export class SubjectTable1681373106127 implements MigrationInterface {
                     },
                     {
                         name:'user_id',
-                        type:'varchar',
-                        length:'255',
+                        type:'uuid',
+                        length:'1000',
                         isNullable:false,
                     },
                     {
                         name:'subject_id',
-                        type:'varchar',
-                        length:'1000',
+                        type:'int',
                         isNullable:false,
                     },
                 ],
             }),
         );
+        await queryRunner.createIndex(
+            'subject_mapping',
+            new TableIndex({
+              name: 'IDX_SUBJECT_TABLE',
+              columnNames: ['id'],
+            }),
+        );
+
+        await queryRunner.createForeignKey(
+            'subject_mapping',
+            new TableForeignKey({
+                name: 'FK_USER',
+                columnNames: ['user_id'],
+                referencedColumnNames: ['id'],
+                referencedTableName: 'users',
+                onDelete: 'cascade',
+            }), 
+        );
+
+        await queryRunner.createForeignKey(
+            'subject_mapping',
+            new TableForeignKey({
+                name: 'FK_SUBJECT',
+                columnNames: ['subject_id'],
+                referencedColumnNames: ['id'],
+                referencedTableName: 'subject',
+                onDelete: 'cascade',
+            }),
+        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.dropForeignKey('subject_mapping','FK_SUBJECT');
+        await queryRunner.dropForeignKey('subject_mapping','FK_USER');
+        await queryRunner.dropIndex('subject_mapping','IDX_SUBJECT_TABLE');
+        await queryRunner.dropTable('subject_mapping');
     }
 
 }
