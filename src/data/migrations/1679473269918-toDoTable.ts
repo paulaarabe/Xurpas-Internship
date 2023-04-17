@@ -27,11 +27,11 @@ export class toDoTable1679473269918 implements MigrationInterface {
                   isNullable: true,
                 },
                 {
-                    name: 'completed',
-                    type: 'boolean',
-                    default: false,
-                    isNullable: false,
-                  },
+                  name: 'completed',
+                  type: 'boolean',
+                  default: false,
+                  isNullable: false,
+                },
               
               ],
             }),
