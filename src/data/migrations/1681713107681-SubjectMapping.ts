@@ -1,6 +1,6 @@
 import { table } from "console";
 import { type } from "os";
-import {  MigrationInterface, QueryRunner, Table, TableIndex} from "typeorm"
+import {  MigrationInterface, QueryRunner, Table, TableIndex,TableForeignKey} from "typeorm"
 
 export class SubjectTable1681373106127 implements MigrationInterface {
 
@@ -10,41 +10,27 @@ export class SubjectTable1681373106127 implements MigrationInterface {
                 name : 'subject',
                 columns: [
                     {
-                        name:'subject_id',
+                        name:'id',
                         type:'int',
                         isPrimary:true,
                         generationStrategy: 'increment',
                         isGenerated: true,
                     },
                     {
-                        name:'subject_name',
+                        name:'user_id',
                         type:'varchar',
                         length:'255',
                         isNullable:false,
                     },
                     {
-                        name:'description',
+                        name:'subject_id',
                         type:'varchar',
                         length:'1000',
-                        isNullable:false,
-                    },
-                    {
-                        name:'subject_status',
-                        type:'varchar',
-                        length:'255',
                         isNullable:false,
                     },
                 ],
             }),
         );
-        
-        /*await queryRunner.createIndex(
-            'subject',
-            new TableIndex({
-              name: 'IDX_SUBJECTS_TABLE',
-              columnNames: ['id'],
-            }),
-          );*/
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
