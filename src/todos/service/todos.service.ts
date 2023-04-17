@@ -88,11 +88,11 @@ export class TodosService {
       todo.description = updateTodoInput.description;
     }
   
-    if (updateTodoInput.completed !== undefined) {
-      todo.isCompleted = updateTodoInput.completed;
+    if (updateTodoInput.isCompleted !== undefined) {
+      todo.isCompleted = updateTodoInput.isCompleted;
     }
   
-    if (updateTodoInput.dueDate) { // New block
+    if (updateTodoInput.dueDate) { 
       todo.dueDate = updateTodoInput.dueDate;
     }
   

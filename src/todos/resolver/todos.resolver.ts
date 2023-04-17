@@ -9,14 +9,32 @@ import {Todo} from '../interface/todos.interface';
 
 @Resolver()
 export class TodosResolver {
+  todosRepository: any;
   constructor(private readonly todosService: TodosService) {}
 
-  @Mutation(() => TodosOutput)
+  // @Mutation(() => TodosOutput)
+  // async createTodo(
+  //   @Args('createTodoInput') createTodoInput: CreateTodoInput,
+  // ): Promise<{ todo: Todo }> {
+  //   const todo = await this.todosService.create(createTodoInput);
+  //   return { todo};
+  // }
+
+  @Mutation(() => TodosEntity)
   async createTodo(
-    @Args('createTodoInput') createTodoInput: CreateTodoInput,
-  ): Promise<{ todo: Todo }> {
-    const todo = await this.todosService.create(createTodoInput);
-    return { todo};
+    @Args('title') title: string,
+    @Args('description') description: string,
+    @Args('dueDate', { nullable: true }) dueDate?: Date,
+  ): Promise<TodosEntity> {
+    const todo = new TodosEntity();
+    todo.title = title;
+    todo.description = description;
+    todo.dateCreated = new Date();
+    todo.dateUpdated = new Date();
+    todo.isCompleted = false;
+    todo.dueDate = dueDate;
+
+    return await this.todosRepository.save(todo);
   }
 
   @Query(() => TodosEntity)

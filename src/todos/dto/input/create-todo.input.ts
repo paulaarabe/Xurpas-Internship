@@ -1,25 +1,24 @@
 import { InputType, Field} from '@nestjs/graphql';
-import { IsNotEmpty, IsOptional } from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
 
 @InputType()
 export class CreateTodoInput {
-  @Field({ nullable: true })
-  @IsOptional()
-  @IsNotEmpty()
+  @Field()
   title: string;
 
-  @Field({ nullable: true })
-  description?: string;
+  @Field()
+  description: string;
 
-  @Field({ nullable: false})
+  @Field()
+  @IsNotEmpty()
   dateCreated: Date;
 
   @Field({ nullable: true })
   dueUpdated: Date;
 
   @Field({ nullable: true })
-  dueDate?: Date;
+  dueDate: Date;
 
-  @Field({ nullable: false })
-  completed?: boolean;
+  @Field()
+  isCompleted: boolean;
 }
