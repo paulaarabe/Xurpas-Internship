@@ -19,5 +19,5 @@ export class TodosOutput{
   updatedAt: Date;
 
   @Field({ nullable: false, defaultValue: false })
-  completed: boolean;
+  isCompleted: boolean;
 }
