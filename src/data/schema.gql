@@ -23,7 +23,7 @@ type TodosOutput {
   description: String
   createdAt: DateTime!
   updatedAt: DateTime!
-  completed: Boolean!
+  isCompleted: Boolean!
 }
 
 type Query {
@@ -31,23 +31,14 @@ type Query {
 }
 
 type Mutation {
-  createTodo(createTodoInput: CreateTodoInput!): TodosOutput!
+  createTodo(title: String!, description: String!, dueDate: DateTime): TodosEntity!
   updateTodo(id: Int!, updateTodoInput: UpdateTodoInput!): TodosOutput!
   deleteTodo(id: Int!): Boolean!
-}
-
-input CreateTodoInput {
-  title: String
-  description: String
-  dateCreated: DateTime!
-  dueUpdated: DateTime
-  dueDate: DateTime
-  completed: Boolean!
 }
 
 input UpdateTodoInput {
   title: String
   description: String
   dueDate: DateTime
-  completed: Boolean!
+  isCompleted: Boolean!
 }
