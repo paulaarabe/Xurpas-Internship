@@ -4,7 +4,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('subject')
 export class SubjectEntity  {
-  @Column()
+  @Column({name:'id'})
   @PrimaryGeneratedColumn('increment') 
   id: number;
   

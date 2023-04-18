@@ -24,7 +24,7 @@ export class SubjectMappingEntity  {
     subjectId: string;
     @OneToOne(
         () => SubjectEntity,
-        (subject_mapping) => subject_mapping.id,
+        (subject) => subject.id,
         { cascade: true },
     )
     @JoinColumn({ name: 'subject_id' })

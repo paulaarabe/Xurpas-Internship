@@ -1,5 +1,3 @@
-import { table } from "console";
-import { type } from "os";
 import {  MigrationInterface, QueryRunner, Table, TableIndex} from "typeorm"
 
 export class SubjectTable1681373106127 implements MigrationInterface {
