@@ -1,5 +1,5 @@
 import corsConfig from '@config/cors.config';
-import { AppModule } from 'src/module/app.module';
+import { AppModule } from 'src/modules/app.module';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
