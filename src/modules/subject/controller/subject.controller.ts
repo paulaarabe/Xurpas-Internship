@@ -8,8 +8,8 @@ export class SubjectController {
   constructor(private readonly subjectService: SubjectService) {}
 
   @Post()
-  create(@Body() createSubjectDto: CreateSubjectInput) {
-    return this.subjectService.create(createSubjectDto);
+  create(@Body() CreateSubjectInput: CreateSubjectInput) {
+    return this.subjectService.create(CreateSubjectInput);
   }
 
   // @Get()
@@ -23,8 +23,8 @@ export class SubjectController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSubjectDto: UpdateSubjectInput) {
-    return this.subjectService.update(+id, updateSubjectDto);
+  update(@Param('id') id: string, @Body() UpdateSubjectInput: UpdateSubjectInput) {
+    return this.subjectService.update(+id, UpdateSubjectInput);
   }
 
   @Delete(':id')
