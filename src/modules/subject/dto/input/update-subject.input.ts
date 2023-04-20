@@ -1,3 +1,16 @@
-import { CreateSubjectInput } from './create-subject.input';
+import { InputType, Field } from "@nestjs/graphql";
+import { IsNotEmpty,IsOptional } from "class-validator";
 
-export class UpdateSubjectDto {}
+@InputType()
+export class UpdateSubjectInput {
+    @Field({nullable:true})
+    @IsOptional()
+    @IsNotEmpty()
+    subject_name:string;
+
+    @Field({nullable:true})
+    description:string;
+
+    @Field({ nullable: false })
+    subject_status: string;
+}
