@@ -3,7 +3,6 @@ import { SubjectEntity } from '@entities/subject.entity';
 import { CreateSubjectInput } from '../dto/input/create-subject.input';
 import { UpdateSubjectInput } from '../dto/input/update-subject.input';
 import { SubjectRepository } from '../repository/subject.repository';
-import { Subject } from '../interface/subject.interface';
 
 export interface Subject extends SubjectEntity {}
 
