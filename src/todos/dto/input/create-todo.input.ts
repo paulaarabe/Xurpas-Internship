@@ -1,5 +1,4 @@
-import { InputType, Field} from '@nestjs/graphql';
-import { IsNotEmpty } from 'class-validator';
+import { Field, InputType } from '@nestjs/graphql';
 
 @InputType()
 export class CreateTodoInput {
@@ -10,11 +9,10 @@ export class CreateTodoInput {
   description: string;
 
   @Field()
-  @IsNotEmpty()
   dateCreated: Date;
 
   @Field({ nullable: true })
-  dueUpdated: Date;
+  dateUpdated: Date;
 
   @Field({ nullable: true })
   dueDate: Date;

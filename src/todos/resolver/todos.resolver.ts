@@ -1,37 +1,31 @@
 import { TodosEntity } from '@entities/todos.entity';
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { DeleteResult } from 'typeorm/query-builder/result/DeleteResult';
-import { CreateTodoInput } from '../dto/input/create-todo.input';
 import { UpdateTodoInput } from '../dto/input/update-todo.input';
 import { TodosOutput } from '../dto/output/todos.output';
 import { TodosService } from '../service/todos.service';
-import {Todo} from '../interface/todos.interface';
+import { TodosRepository } from '../repository/todos.repository';
 
 @Resolver()
 export class TodosResolver {
-  todosRepository: any;
-  constructor(private readonly todosService: TodosService) {}
-
-  // @Mutation(() => TodosOutput)
-  // async createTodo(
-  //   @Args('createTodoInput') createTodoInput: CreateTodoInput,
-  // ): Promise<{ todo: Todo }> {
-  //   const todo = await this.todosService.create(createTodoInput);
-  //   return { todo};
-  // }
+  constructor(
+    private readonly todosService: TodosService,
+    private readonly todosRepository: TodosRepository,
+  ) {}
 
   @Mutation(() => TodosEntity)
   async createTodo(
     @Args('title') title: string,
     @Args('description') description: string,
     @Args('dueDate', { nullable: true }) dueDate?: Date,
+    @Args('isCompleted', { defaultValue: false }) isCompleted?: boolean,
   ): Promise<TodosEntity> {
     const todo = new TodosEntity();
     todo.title = title;
     todo.description = description;
     todo.dateCreated = new Date();
     todo.dateUpdated = new Date();
-    todo.isCompleted = false;
+    todo.isCompleted = isCompleted;
     todo.dueDate = dueDate;
 
     return await this.todosRepository.save(todo);
