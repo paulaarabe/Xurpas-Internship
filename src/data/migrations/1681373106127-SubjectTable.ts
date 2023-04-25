@@ -15,7 +15,7 @@ export class SubjectTable1681373106127 implements MigrationInterface {
                         isGenerated: true,
                     },
                     {
-                        name:'subject_name',
+                        name:'subjectName',
                         type:'varchar',
                         length:'255',
                         isNullable:false,
@@ -27,7 +27,7 @@ export class SubjectTable1681373106127 implements MigrationInterface {
                         isNullable:false,
                     },
                     {
-                        name:'subject_status',
+                        name:'subjectStatus',
                         type:'varchar',
                         length:'255',
                         isNullable:false,

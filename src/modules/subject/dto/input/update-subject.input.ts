@@ -6,11 +6,11 @@ export class UpdateSubjectInput {
     @Field({nullable:true})
     @IsOptional()
     @IsNotEmpty()
-    subject_name:string;
+    subjectName:string;
 
     @Field({nullable:true})
     description:string;
 
     @Field({ nullable: false })
-    subject_status: string;
+    subjectStatus: string;
 }

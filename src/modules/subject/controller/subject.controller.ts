@@ -19,7 +19,7 @@ export class SubjectController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.subjectService.findOne(+id);
+    return this.subjectService.getSubjectsBySubjectId(+id);
   }
 
   @Patch(':id')

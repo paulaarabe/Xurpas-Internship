@@ -7,12 +7,12 @@ export class SubjectOutput{
   id: number;
 
   @Field({ nullable: false })
-  subject_name: string;
+  subjectName: string;
 
   @Field({ nullable: true })
   description: string;
 
   @Field({ nullable: false, defaultValue: false })
-  subject_status: string;
+  subjectStatus: string;
 
 }

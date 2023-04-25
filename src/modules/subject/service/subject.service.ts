@@ -10,31 +10,36 @@ export interface Subject extends SubjectEntity {}
 export class SubjectService {
   constructor(private readonly subjectRepository: SubjectRepository) {}
 
-  async create(createSubjectInput: CreateSubjectInput): Promise<Subject> {
-    const subject = this.subjectRepository.create(createSubjectInput);
-    return this.subjectRepository.save(subject);
+  async create(createSubjectInput: CreateSubjectInput): Promise<SubjectEntity> {
+    return await this.subjectRepository.save(createSubjectInput);
   }
 
-  async findOne(id: number): Promise<Subject> {
-    const subject = await this.subjectRepository.findOneById(id);
-    if (!subject) {
-      // Throw an error if a Subject with the specified ID is not found
-      throw new Error(`Subject with ID ${id} not found`);
-    }
-    return subject;
+  async getSubjectsBySubjectId(subjectId: number): Promise<SubjectEntity> {
+    return this.subjectRepository.findOneById( subjectId );
   }
 
-  async update(id: number, updateSubjectInput: UpdateSubjectInput): Promise<Subject> {
-    const subject = await this.findOne(id);
+  // async findOne(id: number): Promise<Subject> {
+  //   const subject = await this.subjectRepository.findOneById(id);
+  //   if (!subject) {
+  //     // Throw an error if a Subject with the specified ID is not found
+  //     throw new Error(`Subject with ID ${id} not found`);
+  //   }
+  //   return subject;
+  // }
+
+  async update(subjectId: number, updateSubjectInput: UpdateSubjectInput): Promise<SubjectEntity> {
+    const subject = await this.subjectRepository.findOneById(subjectId);
     // Update the Subject with the new values
     Object.assign(subject, updateSubjectInput);
     await this.subjectRepository.save(subject);
     return subject;
   }
 
-  async remove(id: number): Promise<boolean> {
-    const subject = await this.findOne(id);
+  async remove(subjectId: number): Promise<Boolean> {
+    const subject = await this.subjectRepository.findOneById(subjectId);
     await this.subjectRepository.delete(subject);
     return true;
   }
+
+  
 }
