@@ -9,8 +9,23 @@ export class SubjectResolver{
     constructor(private readonly subjectService: SubjectService) {}
     @Query(()=> SubjectOutput)
 
-    async getTodos(): Promise<SubjectEntity[]> {
+    async getSubject(): Promise<SubjectEntity[]> {
         return this.subjectRepository.find();
-      }
-    
+    }
+    async getTodosBySubjectId(userId: number): Promise<SubjectEntity[]> {
+      return this.subjectRepository.find({ where: { userId } });
+    }
+  
+    async getTodosByTitle(title: string): Promise<SubjectEntity[]> {
+      return this.subjectRepository.find({ where: { title } });
+    }
+  
+    async getCompletedSubects(): Promise<SubjectEntity[]> {
+      return this.subjectRepository.find({ where: { completed: true } });
+    }
+  
+    async getPendingSubects(): Promise<SubjectEntity[]> {
+      return this.subjectRepository.find({ where: { completed: false } });
+    }
+      
 }
