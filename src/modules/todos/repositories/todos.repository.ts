@@ -1,16 +1,28 @@
 import { TodosEntity } from "@entities/todos.entity";
 import { Injectable } from "@nestjs/common";
-import { Repository, DataSource } from "typeorm";
-import { CreateTodoInput } from "../dto/input/create-todo.input";
+import { DataSource, Repository } from "typeorm";
+import { CreateTodoInput } from "../dtos/input/create-todo.input";
 
 @Injectable()
 export class TodosRepository extends Repository<TodosEntity> {
-  createTodo(createTodoInput: CreateTodoInput) {
-      throw new Error('Method not implemented.');
+  
+  // async createTodo(createTodoInput: CreateTodoInput): Promise<TodosEntity> {
+  //   const newTodo = this.create(createTodoInput);
+  //   return this.save(newTodo);
+  // }
+  
+  // createTodo(createTodoInput: CreateTodoInput) {
+  //     throw new Error('Method not implemented.');
+  // }
+  
+  // findAllTodos() {
+  //     throw new Error('Method not implemented.');
+  // }
+
+  async findAllTodos(): Promise<TodosEntity[]> {
+    return this.find();
   }
-  findAllTodos() {
-      throw new Error('Method not implemented.');
-  }
+  
   constructor(private readonly dataSource: DataSource) {
     super(TodosEntity, dataSource.createEntityManager());
   }
@@ -30,6 +42,5 @@ export class TodosRepository extends Repository<TodosEntity> {
   async findPending(): Promise<TodosEntity[]> {
     return this.find({ where: { isCompleted: false } });
   }
-
   
 }

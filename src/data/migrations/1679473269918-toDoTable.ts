@@ -1,70 +1,52 @@
-import { MigrationInterface, QueryRunner, Table, TableIndex } from "typeorm"
+import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class toDoTable1679473269918 implements MigrationInterface {
+export class CreateTodosTable1635126173205 implements MigrationInterface {
+  public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.createTable(
+      new Table({
+        name: 'todos',
+        columns: [
+          {
+            name: 'id',
+            type: 'int',
+            isPrimary: true,
+            generationStrategy: 'increment',
+          },
+          {
+            name: 'title',
+            type: 'varchar',
+          },
+          {
+            name: 'description',
+            type: 'text',
+          },
+          {
+            name: 'date_created',
+            type: 'timestamp',
+            default: 'CURRENT_TIMESTAMP',
+          },
+          {
+            name: 'date_updated',
+            type: 'timestamp',
+            default: 'CURRENT_TIMESTAMP',
+            onUpdate: 'CURRENT_TIMESTAMP',
+          },
+          {
+            name: 'is_completed',
+            type: 'boolean',
+            default: false,
+          },
+          {
+            name: 'due_date',
+            type: 'timestamp',
+            isNullable: true,
+          },
+        ],
+      }),
+    );
+  }
 
-    public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.createTable(
-            new Table({
-              name: 'todos',
-              columns: [
-                {
-                  name: 'id',
-                  type: 'int',
-                  isPrimary: true,
-                  generationStrategy: 'increment',
-                  isGenerated: true,
-                },
-                {
-                  name: 'title',
-                  type: 'varchar',
-                  length: '255',
-                  isNullable: false,
-                },
-                {
-                  name: 'description',
-                  type: 'varchar',
-                  length: '1500',
-                  isNullable: true,
-                },
-                {
-                  name: 'dateCreated',
-                  type: 'date',
-                  isNullable: false,
-                },
-                {
-                  name: 'dateUpdated',
-                  type: 'date',
-                  isNullable: false,
-                },
-                {
-                  name: 'dueDate',
-                  type: 'date',
-                  isNullable: false,
-                },
-                {
-                    name: 'completed',
-                    type: 'boolean',
-                    default: false,
-                    isNullable: false,
-                  },
-              
-              ],
-            }),
-          );
-      
-          await queryRunner.createIndex(
-            'todos',
-            new TableIndex({
-              name: 'IDX_TODOS_TABLE',
-              columnNames: ['id'],
-            }),
-          );
-      
-    }
-
-    public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropIndex('todos','IDX_TODOS_TABLE')
-        await queryRunner.dropTable('todos')
-    }
-
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.dropTable('todos');
+  }
 }

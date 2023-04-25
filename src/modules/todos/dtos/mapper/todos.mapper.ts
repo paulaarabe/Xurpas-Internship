@@ -1,5 +1,5 @@
 import { TodosEntity } from '@entities/todos.entity';
-import { Todo } from '../interface/todos.interface';
+import { Todo } from '../../interface/todos.interface';
 
 export class TodosMapper {
     public mapToEntity(dto: Todo): TodosEntity {

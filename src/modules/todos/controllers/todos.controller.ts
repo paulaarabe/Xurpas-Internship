@@ -1,17 +1,15 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { TodosEntity } from '@entities/todos.entity';
-import { TodosService } from '../service/todos.service';
-import { CreateTodoInput } from '../dto/input/create-todo.input';
-import { UpdateTodoInput } from '../dto/input/update-todo.input';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { TodosService } from '../services/todos.service';
 
 @Resolver()
-export class TodosResolver {
+export class TodosController {
   constructor(private readonly todosService: TodosService) {}
 
-  @Query(() => [TodosEntity])
-  async todos(): Promise<TodosEntity[]> {
-    return this.todosService.getAllTodos();
-  }
+  // @Query(() => [TodosEntity])
+  // async todos(): Promise<TodosEntity[]> {
+  //   return this.todosService.getAllTodos();
+  // }
 
   @Query(() => TodosEntity)
   async todoById(@Args('id') id: number): Promise<TodosEntity> {
