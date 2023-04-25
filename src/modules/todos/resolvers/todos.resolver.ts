@@ -1,16 +1,16 @@
 import { TodosEntity } from '@entities/todos.entity';
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { DeleteResult } from 'typeorm/query-builder/result/DeleteResult';
-import { UpdateTodoInput } from '../dto/input/update-todo.input';
-import { TodosOutput } from '../dto/output/todos.output';
-import { TodosService } from '../service/todos.service';
-import { TodosRepository } from '../repository/todos.repository';
+import { UpdateTodoInput } from '../dtos/input/update-todo.input';
+import { TodosOutput } from '../dtos/output/todos.output';
+import { TodosService } from '../services/todos.service';
+import { TodosRepository } from '../repositories/todos.repository';
 
 @Resolver()
 export class TodosResolver {
+  todosRepository: any;
   constructor(
     private readonly todosService: TodosService,
-    private readonly todosRepository: TodosRepository,
   ) {}
 
   @Mutation(() => TodosEntity)
