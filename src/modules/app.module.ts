@@ -2,15 +2,16 @@ import { GraphqlService } from '@config/graphql/graphql.service';
 import { HttpExceptionFilter } from '@config/http-exception.filter';
 import { databaseConfig } from '@config/typeorm.config';
 import { ApolloDriver } from '@nestjs/apollo';
-import { Module } from '@nestjs/common';
+import { Module, MiddlewareConsumer, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_FILTER } from '@nestjs/core';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { I18nJsonParser, I18nModule } from 'nestjs-i18n';
 import { join } from 'path';
-import { UserModule } from './user/user.module';
 import { TodosModule } from '../todos/module/todos.module';
+import { UserModule } from './auth/module/users.module'; 
+import { CookieParserMiddleware } from '@nest-middlewares/cookie-parser';
 
 @Module({
   imports: [
@@ -38,4 +39,8 @@ import { TodosModule } from '../todos/module/todos.module';
     },
   ],
 })
-export class AppModule {}
+export class AppModule implements NestModule{
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(CookieParserMiddleware).forRoutes('*');
+  }
+}

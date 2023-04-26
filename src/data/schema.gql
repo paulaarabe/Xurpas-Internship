@@ -26,14 +26,33 @@ type TodosOutput {
   completed: Boolean!
 }
 
+type User {
+  id: ID!
+  email: String!
+  first_name: String!
+  last_name: String!
+  address: String!
+  user_type: UserType!
+}
+
+enum UserType {
+  ADMIN
+  CUSTOMER
+  AGENT
+  USER
+}
+
 type Query {
   todos(id: Int!): TodosEntity!
+  loginUser(email: String!, password: String!): UserType!
 }
 
 type Mutation {
   createTodo(createTodoInput: CreateTodoInput!): TodosOutput!
   updateTodo(id: Int!, updateTodoInput: UpdateTodoInput!): TodosOutput!
   deleteTodo(id: Int!): Boolean!
+  registerUser(createUserData: CreateUserInput!): User!
+  deleteUser(id: ID!): Boolean!
 }
 
 input CreateTodoInput {
@@ -50,4 +69,14 @@ input UpdateTodoInput {
   description: String
   dueDate: DateTime
   completed: Boolean!
+}
+
+input CreateUserInput {
+  id: String!
+  email: String!
+  password: String!
+  firstName: String!
+  lastName: String!
+  address: String!
+  type: String!
 }
