@@ -11,6 +11,7 @@ import { I18nJsonParser, I18nModule } from 'nestjs-i18n';
 import { join } from 'path';
 import { TodosModule } from './todos/todos.module';
 import { SubjectModule } from './subject/subject.module';
+import { SubjectMappingModule } from './subject_mapping/subject_mapping.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { SubjectModule } from './subject/subject.module';
     }),
     TodosModule,
     SubjectModule,
+    SubjectMappingModule,
     
   ],
   providers: [

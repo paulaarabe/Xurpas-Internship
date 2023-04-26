@@ -18,6 +18,9 @@ export class SubjectService {
     return this.subjectRepository.findOneById( subjectId );
   }
 
+  async getAllSubjects(): Promise<SubjectEntity[]> {
+    return this.subjectRepository.findAll();
+  }
   // async findOne(id: number): Promise<Subject> {
   //   const subject = await this.subjectRepository.findOneById(id);
   //   if (!subject) {

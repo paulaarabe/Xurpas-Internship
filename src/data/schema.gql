@@ -23,21 +23,28 @@ type SubjectOutput {
   subjectStatus: String!
 }
 
+type SubjectMapOutput {
+  id: ID
+  userId: String!
+  subjectId: String!
+}
+
 type Query {
   getTodos: TodosOutput!
-  getsubject(subjectId: Float!): SubjectOutput!
+  getSubject(subjectId: Float!): SubjectOutput!
+  getallSubject: SubjectOutput!
+  getSubjectMap(subjectId: Float!): SubjectMapOutput!
 }
 
 type Mutation {
-  createsubject(createSubjectInput: CreateSubjectInput!): SubjectOutput!
-  updatesubject(subjectId: Float!, updateSubjectInput: UpdateSubjectInput!): SubjectOutput!
-  removesubject(subjectId: Float!): SubjectOutput!
+  createSubject(createSubjectInput: CreateSubjectMapInput!): SubjectMapOutput!
+  updateSubject(subjectId: Float!, updateSubjectInput: UpdateSubjectInput!): SubjectOutput!
+  removeSubject(subjectId: Float!): SubjectOutput!
 }
 
-input CreateSubjectInput {
-  subjectName: String
-  description: String
-  subjectStatus: String!
+input CreateSubjectMapInput {
+  userId: String
+  subjectId: String
 }
 
 input UpdateSubjectInput {

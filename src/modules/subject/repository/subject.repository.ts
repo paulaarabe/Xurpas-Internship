@@ -6,7 +6,6 @@ import { CreateSubjectInput } from "../dto/input/create-subject.input";
 @Injectable()
 export class SubjectRepository extends Repository<SubjectEntity> {
    
-    
     constructor(private readonly dataSource: DataSource) {
         super(SubjectEntity, dataSource.createEntityManager());
     }
