@@ -20,4 +20,8 @@ export class TodosOutput{
   
   @Field({ nullable: false })
   updatedAt: Date;
+
+  @Field({ nullable: false, defaultValue: false })
+  isCompleted: boolean;
+
 }

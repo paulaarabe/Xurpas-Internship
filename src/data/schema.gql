@@ -5,10 +5,11 @@
 type TodosOutput {
   id: ID
   title: String!
-  description: String
-  completed: Boolean!
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  description: String!
+  dateCreated: DateTime!
+  dateUpdated: DateTime!
+  isCompleted: Boolean!
+  dueDate: DateTime
 }
 
 """
@@ -20,13 +21,9 @@ type SubjectOutput {
   id: ID
   subjectName: String!
   description: String
-  subjectStatus: String!
-}
-
-type SubjectMapOutput {
-  id: ID
-  userId: String!
-  subjectId: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  completed: Boolean!
 }
 
 type Query {
@@ -37,18 +34,23 @@ type Query {
 }
 
 type Mutation {
-  createSubject(createSubjectInput: CreateSubjectMapInput!): SubjectMapOutput!
-  updateSubject(subjectId: Float!, updateSubjectInput: UpdateSubjectInput!): SubjectOutput!
-  removeSubject(subjectId: Float!): SubjectOutput!
+  createTodo(createTodoInput: CreateTodoInput!): TodosOutput!
+  updateTodo(id: Int!, updateTodoInput: UpdateTodoInput!): TodosOutput!
+  deleteTodo(id: Int!): Boolean!
 }
 
-input CreateSubjectMapInput {
-  userId: String
-  subjectId: String
+input CreateTodoInput {
+  title: String
+  description: String
+  dateCreated: DateTime!
+  dueUpdated: DateTime
+  dueDate: DateTime
+  completed: Boolean!
 }
 
 input UpdateSubjectInput {
   subjectName: String
   description: String
-  subjectStatus: String!
+  dueDate: DateTime
+  completed: Boolean!
 }

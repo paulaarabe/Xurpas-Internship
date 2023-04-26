@@ -28,7 +28,7 @@ export class TodosEntity {
   @Column({ default: false })
   isCompleted: boolean;
 
-  @Field({ nullable: true }) 
+  @Field()
   @Column({ nullable: true })
   dueDate: Date; 
 }

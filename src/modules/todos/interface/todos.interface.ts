@@ -1,10 +1,11 @@
+
 export interface Todo {
+    dueDate: Date;
     id: number;
     title: string;
     description: string;
-    completed: boolean;
-    createdAt: Date;
-    updatedAt: Date;
-    
-  }
+    dateCreated: Date;
+    dateUpdated: Date;
+    isCompleted: boolean;
+}
   

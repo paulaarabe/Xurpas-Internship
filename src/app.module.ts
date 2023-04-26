@@ -9,9 +9,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { I18nJsonParser, I18nModule } from 'nestjs-i18n';
 import { join } from 'path';
-import { TodosModule } from './todos/todos.module';
-import { SubjectModule } from './subject/subject.module';
-import { SubjectMappingModule } from './subject_mapping/subject_mapping.module';
+import { TodosModule } from './modules/app.module';
 
 @Module({
   imports: [
@@ -29,8 +27,6 @@ import { SubjectMappingModule } from './subject_mapping/subject_mapping.module';
       },
     }),
     TodosModule,
-    SubjectModule,
-    SubjectMappingModule,
     
   ],
   providers: [
@@ -41,4 +37,3 @@ import { SubjectMappingModule } from './subject_mapping/subject_mapping.module';
   ],
 })
 export class AppModule {}
-export { TodosModule };
