@@ -13,11 +13,14 @@ export class TodosOutput{
   description: string;
   
   @Field({ nullable: false })
-  createdAt: Date;
+  dateCreated: Date;
   
   @Field({ nullable: false })
-  updatedAt: Date;
+  dateUpdated: Date;
 
   @Field({ nullable: false, defaultValue: false })
   isCompleted: boolean;
+
+  @Field({ nullable: true })
+  dueDate: Date; 
 }
