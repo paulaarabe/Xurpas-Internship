@@ -26,6 +26,7 @@ type SubjectOutput {
 
 type SubjectMapOutput {
   id: ID
+  userId: String!
   subjectId: Float!
 }
 
@@ -56,5 +57,6 @@ input UpdateSubjectInput {
 }
 
 input CreateSubjectMapInput {
+  userId: Float
   subjectId: Float
 }
