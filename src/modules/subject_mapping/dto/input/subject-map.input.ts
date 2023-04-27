@@ -1,12 +1,12 @@
 import { InputType, Field } from "@nestjs/graphql";
-import { IsNotEmpty,IsOptional } from "class-validator";
+import { IsNotEmpty, IsNumber, IsOptional } from "class-validator";
 
 @InputType()
 export class CreateSubjectMapInput {
+  @Field(() => Number, { nullable: true })
+  @IsOptional()
+  @IsNotEmpty()
+  @IsNumber()
+  subjectId?: number;
 
-    @Field({ nullable: true })
-    userId: string;
-
-    @Field({ nullable: true })
-    subjectId: string;
 }

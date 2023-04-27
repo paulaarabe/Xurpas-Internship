@@ -6,10 +6,10 @@ export class SubjectMapOutput{
   @Field(() => ID, { nullable: true })
   id: number;
 
-  @Field({ nullable: false })
-  userId: string;
+  // @Field({ nullable: false })
+  // userId: string;
 
   @Field({ nullable: false})
-  subjectId: string;
+  subjectId: number;
 
 }

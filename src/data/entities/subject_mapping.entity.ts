@@ -21,7 +21,7 @@ export class SubjectMappingEntity  {
     user: UserEntity;
 
     @Column({ name: 'subject_id' })
-    subjectId: string;
+    subjectId: number;
     @OneToOne(
         () => SubjectEntity,
         (subject) => subject.id,

@@ -10,6 +10,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { I18nJsonParser, I18nModule } from 'nestjs-i18n';
 import { join } from 'path';
 import { TodosModule } from './modules/app.module';
+import { SubjectModule } from '@modules/subject/subject.module';
+import { SubjectMappingModule } from '@modules/subject_mapping/subject_mapping.module';
 
 @Module({
   imports: [
@@ -27,6 +29,8 @@ import { TodosModule } from './modules/app.module';
       },
     }),
     TodosModule,
+    SubjectModule,
+    SubjectMappingModule,
     
   ],
   providers: [

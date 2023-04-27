@@ -7,11 +7,14 @@ import { CreateSubjectMapInput } from "../dto/input/subject-map.input";
 export class SubjectMapService{
     constructor(private readonly subjectRepository: SubjectMapRepository){}
 
-    async create(createSubjectMapInput: CreateSubjectMapInput): Promise<SubjectMappingEntity> {
+    async createSubjectMap(createSubjectMapInput: CreateSubjectMapInput): Promise<SubjectMappingEntity> {
         return await this.subjectRepository.save(createSubjectMapInput);
       }
 
     async getsubjectmapId(subjectmapId:number): Promise<SubjectMappingEntity>{
-        return this.subjectRepository.findOneById( subjectmapId );
+        const IDmap = this.subjectRepository.findOneById( subjectmapId );
+        console.log({IDmap:IDmap})
+        return IDmap
     }
+
 }

@@ -38,10 +38,10 @@ export class SubjectService {
     return subject;
   }
 
-  async remove(subjectId: number): Promise<Boolean> {
+  async remove(subjectId: number): Promise<SubjectEntity> {
     const subject = await this.subjectRepository.findOneById(subjectId);
     await this.subjectRepository.delete(subject);
-    return true;
+    return subject;
   }
 
   

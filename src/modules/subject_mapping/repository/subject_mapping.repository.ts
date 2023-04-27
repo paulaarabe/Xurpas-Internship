@@ -10,11 +10,11 @@ export class SubjectMapRepository extends Repository<SubjectMappingEntity> {
     }
 
     async findOneById(id: number): Promise<SubjectMappingEntity> {
-        return super.findOne({ where: { id } });
+        return super.findOne({ where: { id },relations:{subject:true} });
       }
     
       async findAll(): Promise<SubjectMappingEntity[]> {
         return this.find();
       }
-      
+
 }
