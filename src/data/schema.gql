@@ -21,9 +21,10 @@ type TodosOutput {
   id: ID
   title: String
   description: String
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  dateCreated: DateTime!
+  dateUpdated: DateTime!
   isCompleted: Boolean!
+  dueDate: DateTime
 }
 
 type Query {
@@ -31,7 +32,7 @@ type Query {
 }
 
 type Mutation {
-  createTodo(title: String!, description: String!, dueDate: DateTime, isCompleted: Boolean! = false): TodosEntity!
+  createTodo(title: String!, description: String!, dueDate: DateTime, isCompleted: Boolean! = false): TodosOutput!
   updateTodo(id: Int!, updateTodoInput: UpdateTodoInput!): TodosOutput!
   deleteTodo(id: Int!): Boolean!
 }
