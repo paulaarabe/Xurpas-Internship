@@ -48,6 +48,7 @@
     "dotenv": "^16.0.3",
     "graphql": "^16.6.0",
     "graphql-tools": "^8.3.15",
+    "nestjs": "^0.0.1",
     "nestjs-i18n": "^8.2.2",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
