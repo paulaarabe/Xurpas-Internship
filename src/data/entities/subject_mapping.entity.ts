@@ -10,15 +10,15 @@ export class SubjectMappingEntity  {
     @PrimaryGeneratedColumn('increment') 
     id: number;
 
-    @Column({ name: 'user_id' })
-    userId: string;
-    @OneToOne(
-        () => UserEntity,
-        (user) => user.id,
-        { cascade: true },
-    )
-    @JoinColumn({ name: 'user_id' })
-    user: UserEntity;
+    // @Column({ name: 'user_id' })
+    // userId: string;
+    // @OneToOne(
+    //     () => UserEntity,
+    //     (user) => user.id,
+    //     { cascade: true },
+    // )
+    // @JoinColumn({ name: 'user_id' })
+    // user: UserEntity;
 
     @Column({ name: 'subject_id' })
     subjectId: number;

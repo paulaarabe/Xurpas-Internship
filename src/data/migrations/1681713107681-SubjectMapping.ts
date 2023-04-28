@@ -16,11 +16,11 @@ export class SubjectMappingTable1681713107681 implements MigrationInterface {
                         generationStrategy: 'increment',
                         isGenerated: true,
                     },
-                    {
-                        name:'user_id',
-                        type:'uuid',
-                        isNullable:false,
-                    },
+                    // {
+                    //     name:'user_id',
+                    //     type:'uuid',
+                    //     isNullable:false,
+                    // },
                     {
                         name:'subject_id',
                         type:'int',
@@ -37,16 +37,16 @@ export class SubjectMappingTable1681713107681 implements MigrationInterface {
             }),
         );
 
-        await queryRunner.createForeignKey(
-            'subject_mapping',
-            new TableForeignKey({
-                name: 'FK_USER',
-                columnNames: ['user_id'],
-                referencedColumnNames: ['id'],
-                referencedTableName: 'users',
-                onDelete: 'cascade',
-            }), 
-        );
+        // await queryRunner.createForeignKey(
+        //     'subject_mapping',
+        //     new TableForeignKey({
+        //         name: 'FK_USER',
+        //         columnNames: ['user_id'],
+        //         referencedColumnNames: ['id'],
+        //         referencedTableName: 'users',
+        //         onDelete: 'cascade',
+        //     }), 
+        // );
 
         await queryRunner.createForeignKey(
             'subject_mapping',
@@ -62,7 +62,7 @@ export class SubjectMappingTable1681713107681 implements MigrationInterface {
 
     public async down(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.dropForeignKey('subject_mapping','FK_SUBJECT');
-        await queryRunner.dropForeignKey('subject_mapping','FK_USER');
+        // await queryRunner.dropForeignKey('subject_mapping','FK_USER');
         await queryRunner.dropIndex('subject_mapping','IDX_SUBJECT_MAPPING_TABLE');
         await queryRunner.dropTable('subject_mapping');
     }
