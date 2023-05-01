@@ -1,90 +1,81 @@
+import { TodosEntity } from '@entities/todos.entity';
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { DeleteResult } from 'typeorm/query-builder/result/DeleteResult';
-import { TodosEntity } from '../../../data/entities/todos.entity';
+import { DeleteResult } from 'typeorm';
 import { CreateTodoInput } from '../dtos/input/create-todo.input';
 import { UpdateTodoInput } from '../dtos/input/update-todo.input';
 import { TodosRepository } from '../repositories/todos.repository';
 
 @Injectable()
 export class TodosService {
-  findOneById(id: number) {
+  create(createTodoInput: CreateTodoInput) {
     throw new Error('Method not implemented.');
   }
-  getTodoById(id: number): TodosEntity | PromiseLike<TodosEntity> {
+  updateTodo(arg0: number) {
     throw new Error('Method not implemented.');
   }
-  createTodo(newTodo: TodosEntity): TodosEntity | PromiseLike<TodosEntity> {
+  // update(updateTodoInput: UpdateTodoInput) {
+  //   throw new Error('Method not implemented.');
+  // }
+  findOne(arg0: { id: number; }): TodosEntity | PromiseLike<TodosEntity> {
     throw new Error('Method not implemented.');
   }
-  updateTodoById(id: number, updatedTodo: any): TodosEntity | PromiseLike<TodosEntity> {
+  findAll() {
     throw new Error('Method not implemented.');
   }
-  deleteTodoById(id: number): boolean | PromiseLike<boolean> {
+  // updateTodo(arg0: number) {
+  //   throw new Error('Method not implemented.');
+  // }
+  removeTodo(arg0: number) {
     throw new Error('Method not implemented.');
   }
-  constructor(private readonly todosRepository: TodosRepository) {}
 
-  async update(id: number, updateTodoInput: UpdateTodoInput): Promise<TodosEntity> {
-    const todo = await this.todosRepository.findOne({ where: { id } });
-  
-    if (!todo) {
-      throw new NotFoundException(`Todo with ID ${id} not found`);
-    }
-  
-    if (updateTodoInput.title) {
-      todo.title = updateTodoInput.title;
-    }
-  
-    if (updateTodoInput.description) {
-      todo.description = updateTodoInput.description;
-    }
-  
-    if (updateTodoInput.isCompleted !== undefined) {
-      todo.isCompleted = updateTodoInput.isCompleted;
-    }
-  
-    if (updateTodoInput.dueDate) { 
-      todo.dueDate = updateTodoInput.dueDate;
-    }
-  
-    todo.dateUpdated = new Date();
-    return this.todosRepository.save(todo);
-  }
-  
-  // Get all todos
+  constructor(private todosRepository: TodosRepository) {}
+
   async getAllTodos(): Promise<TodosEntity[]> {
-    const todos = await this.todosRepository.find();
-    return todos;
+    return this.todosRepository.find();
   }
 
-  // Create a new todo
-  async create(createTodoInput: CreateTodoInput): Promise<TodosEntity> {
-    const todo = this.todosRepository.create(createTodoInput);
-    return this.todosRepository.save(todo);
-  }
-
-  // // Update a todo by its ID
-  // async update(id: number, updateTodoInput: Partial<UpdateTodoInput>): Promise<TodosEntity> {
-  //   const todo = await this.todosRepository.findOne(id);
-
+  // async findOne(id: number): Promise<TodosEntity> {
+  //   const todo = await this.todosRepository.findOne({ id });
   //   if (!todo) {
   //     throw new NotFoundException(`Todo with ID ${id} not found`);
   //   }
-
-  //   Object.assign(todo, updateTodoInput);
-  //   todo.dateUpdated = new Date();
-
-  //   return this.todosRepository.save(todo);
+  //   return todo;
   // }
 
-  // Delete a todo by its ID
-  async delete(id: number): Promise<DeleteResult> {
-    const result = await this.todosRepository.delete(id);
+  async createTodo(createTodoInput: CreateTodoInput): Promise<TodosEntity> {
+    const { title, description, dueDate, isCompleted } = createTodoInput;
 
-    if (result.affected === 0) {
+    const todo = new TodosEntity();
+    todo.title = title;
+    todo.description = description;
+    todo.dueDate = dueDate;
+    todo.isCompleted = isCompleted;
+
+    return this.todosRepository.save(todo);
+  }
+
+  async update(id: number, updateTodoInput: UpdateTodoInput): Promise<TodosEntity> {
+    const { title, description, dueDate, isCompleted } = updateTodoInput;
+
+    const todo = await this.todosRepository.findOne({ where: { id } });
+    if (!todo) {
       throw new NotFoundException(`Todo with ID ${id} not found`);
     }
 
+    todo.title = title ?? todo.title;
+    todo.description = description ?? todo.description;
+    todo.dueDate = dueDate ?? todo.dueDate;
+    todo.isCompleted = isCompleted ?? todo.isCompleted;
+
+    return this.todosRepository.save(todo);
+  }
+
+  async delete(id: number): Promise<DeleteResult> {
+    const result = await this.todosRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException(`Todo with ID ${id} not found`);
+    }
     return result;
   }
 }
