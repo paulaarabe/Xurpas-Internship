@@ -28,13 +28,23 @@ type TodosOutput {
 }
 
 type Query {
-  todos(id: Int!): TodosEntity!
+  findOne(id: Float!): TodosEntity!
+  getAllTodos: [TodosEntity!]!
 }
 
 type Mutation {
-  createTodo(title: String!, description: String!, dueDate: DateTime, isCompleted: Boolean! = false): TodosOutput!
+  createTodo(createTodoInput: CreateTodoInput!): TodosOutput!
   updateTodo(id: Int!, updateTodoInput: UpdateTodoInput!): TodosOutput!
   deleteTodo(id: Int!): Boolean!
+}
+
+input CreateTodoInput {
+  title: String!
+  description: String!
+  dateCreated: DateTime!
+  dateUpdated: DateTime
+  dueDate: DateTime
+  isCompleted: Boolean!
 }
 
 input UpdateTodoInput {

@@ -8,4 +8,3 @@ export interface Todo {
     dateUpdated: Date;
     isCompleted: boolean;
 }
-  

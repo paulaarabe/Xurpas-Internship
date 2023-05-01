@@ -4,63 +4,38 @@ import { DeleteResult } from 'typeorm/query-builder/result/DeleteResult';
 import { UpdateTodoInput } from '../dtos/input/update-todo.input';
 import { TodosOutput } from '../dtos/output/todos.output';
 import { TodosService } from '../services/todos.service';
-import { TodosRepository } from '../repositories/todos.repository';
+import { CreateTodoInput } from '../dtos/input/create-todo.input';
 
-@Resolver()
+@Resolver(() => TodosOutput)
 export class TodosResolver {
-  todosRepository: any;
-  constructor(
-    private readonly todosService: TodosService,
-  ) {}
-
-  @Mutation(() => TodosEntity)
-  async createTodo(
-    @Args('title') title: string,
-    @Args('description') description: string,
-    @Args('dueDate', { nullable: true }) dueDate?: Date,
-    @Args('isCompleted', { defaultValue: false }) isCompleted?: boolean,
-  ): Promise<TodosEntity> {
-    const todo = new TodosEntity();
-    todo.title = title;
-    todo.description = description;
-    todo.dateCreated = new Date();
-    todo.dateUpdated = new Date();
-    todo.isCompleted = isCompleted;
-    todo.dueDate = dueDate;
-
-    return await this.todosRepository.save(todo);
-  }
+  constructor(private readonly todosService: TodosService) {}
 
   @Query(() => TodosEntity)
-  async todos(@Args('id', { type: () => Int }) id: number) {
-    return this.todosService.findOneById(id);
+  async findOne(@Args("id") id: number): Promise<TodosEntity> {
+    return this.todosService.findOne({ id });
+  }
+
+  @Query(() => [TodosEntity])
+  async getAllTodos(): Promise<TodosEntity[]> {
+    return this.todosService.getAllTodos();
+  }
+
+  @Mutation(() => TodosOutput)
+  async createTodo(
+    @Args('createTodoInput') createTodoInput: CreateTodoInput,
+  ): Promise<TodosOutput> {
+    const todo = await this.todosService.create(createTodoInput);
+    return;
   }
 
   @Mutation(() => TodosOutput)
   async updateTodo(
     @Args('id', { type: () => Int }) id: number,
     @Args('updateTodoInput') updateTodoInput: UpdateTodoInput,
-  ): Promise<TodosEntity> {
+  ): Promise<TodosOutput> {
     const todo = await this.todosService.update(id, updateTodoInput);
-    return todo;
+    return;
   }
-
-  // @Mutation(() => TodoType) // specify the output type
-  // async updateTodo(
-  //   @Args('id', { type: () => Int }) id: number,
-  //   @Args('updateTodoInput') updateTodoInput: UpdateTodoInput,
-  // ): Promise<TodosEntity> {
-  //   const todo = await this.todosService.update(id, updateTodoInput);
-  //   return todo;
-  // }
-
-  // @Mutation(() => Todo)
-  // async updateTodo(
-  //   @Args('id', { type: () => Int }) id: number,
-  //   @Args('updateTodoInput') updateTodoInput: UpdateTodoInput,
-  // ) {
-  //   return await this.todosService.update(id, updateTodoInput);
-  // }
 
   @Mutation(() => Boolean)
   async deleteTodo(
