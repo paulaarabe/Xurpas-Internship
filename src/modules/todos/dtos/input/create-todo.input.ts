@@ -5,7 +5,7 @@ export class CreateTodoInput {
   @Field()
   title: string;
 
-  @Field()
+  @Field({ nullable: true })
   description: string;
 
   @Field()
