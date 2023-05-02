@@ -5,18 +5,9 @@ import { DataSource, Repository } from "typeorm";
 @Injectable()
 export class TodosRepository extends Repository<TodosEntity> {
   
-  // async createTodo(createTodoInput: CreateTodoInput): Promise<TodosEntity> {
-  //   const newTodo = this.create(createTodoInput);
-  //   return this.save(newTodo);
-  // }
-  
-  // createTodo(createTodoInput: CreateTodoInput) {
-  //     throw new Error('Method not implemented.');
-  // }
-  
-  // findAllTodos() {
-  //     throw new Error('Method not implemented.');
-  // }
+  createTodo(createTodoInput: CreateTodoInput) {
+    throw new Error('Method not implemented.');
+  }
 
   async findAllTodos(): Promise<TodosEntity[]> {
     return this.find();

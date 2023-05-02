@@ -21,6 +21,7 @@ type SubjectOutput {
   id: ID
   subjectName: String!
   description: String
+<<<<<<< HEAD
   subjectStatus: String!
 }
 
@@ -45,6 +46,36 @@ type Mutation {
 
 input CreateSubjectInput {
   subjectName: String
+=======
+  dateCreated: DateTime!
+  dateUpdated: DateTime!
+  isCompleted: Boolean!
+  dueDate: DateTime
+}
+
+type Query {
+  findOne(id: Float!): TodosEntity!
+  getAllTodos: [TodosEntity!]!
+}
+
+type Mutation {
+  createTodo(createTodoInput: CreateTodoInput!): TodosOutput!
+  updateTodo(id: Int!, updateTodoInput: UpdateTodoInput!): TodosOutput!
+  deleteTodo(id: Int!): Boolean!
+}
+
+input CreateTodoInput {
+  title: String!
+  description: String
+  dateCreated: DateTime!
+  dateUpdated: DateTime
+  dueDate: DateTime
+  isCompleted: Boolean!
+}
+
+input UpdateTodoInput {
+  title: String
+>>>>>>> 3225c6843c0a1b7088e9b595fd10a5cb8c037aaf
   description: String
   subjectStatus: String!
 }
