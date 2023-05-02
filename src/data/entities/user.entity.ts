@@ -4,6 +4,7 @@ import { ObjectType, Field, ID } from '@nestjs/graphql';
 
 @Entity({ name: 'users' })
 @ObjectType()
+// used class "User" as exported entity - Torres
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   @Field(() => ID)

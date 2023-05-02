@@ -9,15 +9,11 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { I18nJsonParser, I18nModule } from 'nestjs-i18n';
 import { join } from 'path';
-<<<<<<< HEAD
 import { TodosModule } from './todos/todos.module';
-import { SubjectModule } from './subject/subject.module';
-import { SubjectMappingModule } from './subject_mapping/subject_mapping.module';
-=======
-import { TodosModule } from '../todos/module/todos.module';
 import { UserModule } from './auth/module/users.module'; 
 import { CookieParserMiddleware } from '@nest-middlewares/cookie-parser';
->>>>>>> 9a63d1a4441a897612cbb9081111381c90d3eea6
+import { SubjectMappingModule } from './subject_mapping/subject_mapping.module';
+import { SubjectModule } from './subject/subject.module';
 
 @Module({
   imports: [
@@ -46,13 +42,9 @@ import { CookieParserMiddleware } from '@nest-middlewares/cookie-parser';
     },
   ],
 })
-<<<<<<< HEAD
-export class AppModule {}
 export { TodosModule };
-=======
 export class AppModule implements NestModule{
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(CookieParserMiddleware).forRoutes('*');
   }
 }
->>>>>>> 9a63d1a4441a897612cbb9081111381c90d3eea6

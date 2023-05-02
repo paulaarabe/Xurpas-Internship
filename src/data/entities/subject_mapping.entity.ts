@@ -1,5 +1,5 @@
 import { SubjectEntity } from './subject.entity';
-import { UserEntity } from './user.entity';
+import { User } from './user.entity';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, PrimaryGeneratedColumn,OneToOne,JoinColumn,ManyToOne,ManyToMany } from 'typeorm';
 
@@ -10,15 +10,15 @@ export class SubjectMappingEntity  {
     @PrimaryGeneratedColumn('increment') 
     id: number;
 
-    // @Column({ name: 'user_id' })
-    // userId: string;
-    // @OneToOne(
-    //     () => UserEntity,
-    //     (user) => user.id,
-    //     { cascade: true },
-    // )
-    // @JoinColumn({ name: 'user_id' })
-    // user: UserEntity;
+    @Column({ name: 'user_id' })
+    userId: string;
+    @OneToOne(
+        () => User,
+        (user) => user.id,
+        { cascade: true },
+    )
+    @JoinColumn({ name: 'user_id' })
+    user: User;
 
     @Column({ name: 'subject_id' })
     subjectId: number;

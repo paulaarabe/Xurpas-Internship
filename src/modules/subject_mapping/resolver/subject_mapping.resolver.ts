@@ -10,7 +10,7 @@ export class SubjectMapResolver{
     constructor(private readonly subjectmapService: SubjectMapService) {}
 
     @Query(()=>SubjectMapOutput)
-    async getSubjectMap(@Args('subjectId')subjectmapId:number){
+    async getSubjectMap(@Args('subjectMapId')subjectmapId:number){
       return await this.subjectmapService.getsubjectmapId(subjectmapId)
     }
     

@@ -16,11 +16,11 @@ export class SubjectMappingTable1681713107681 implements MigrationInterface {
                         generationStrategy: 'increment',
                         isGenerated: true,
                     },
-                    // {
-                    //     name:'user_id',
-                    //     type:'uuid',
-                    //     isNullable:false,
-                    // },
+                    {
+                        name:'user_id',
+                        type:'uuid',
+                        isNullable:false,
+                    },
                     {
                         name:'subject_id',
                         type:'int',
