@@ -1,4 +1,5 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { IsNotEmpty } from 'class-validator';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @ObjectType() 
@@ -10,6 +11,7 @@ export class TodosEntity {
 
   @Field()
   @Column()
+  @IsNotEmpty()
   title: string;
 
   @Field() 
