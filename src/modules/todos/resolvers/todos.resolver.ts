@@ -10,12 +10,12 @@ import { CreateTodoInput } from '../dtos/input/create-todo.input';
 export class TodosResolver {
   constructor(private readonly todosService: TodosService) {}
 
-  @Query(() => TodosEntity)
-  async findOne(@Args("id") id: number): Promise<TodosEntity> {
-    return this.todosService.findOne({ id });
-  }
+  // @Query(() => TodosEntity)
+  // async findOne(@Args("id") id: number): Promise<TodosEntity> {
+  //   return this.todosService.findOne({ id });
+  // }
 
-  @Query(() => [TodosEntity])
+  @Query(() => [TodosOutput])
   async getAllTodos(): Promise<TodosEntity[]> {
     return this.todosService.getAllTodos();
   }
@@ -24,17 +24,16 @@ export class TodosResolver {
   async createTodo(
     @Args('createTodoInput') createTodoInput: CreateTodoInput,
   ): Promise<TodosOutput> {
-    const todo = await this.todosService.create(createTodoInput);
-    return;
+    const todo = await this.todosService.createTodo(createTodoInput);
+    return createTodoInput;
   }
 
   @Mutation(() => TodosOutput)
   async updateTodo(
-    @Args('id', { type: () => Int }) id: number,
     @Args('updateTodoInput') updateTodoInput: UpdateTodoInput,
-  ): Promise<TodosOutput> {
-    const todo = await this.todosService.update(id, updateTodoInput);
-    return;
+  ): Promise<UpdateTodoInput> {
+    const todo = await this.todosService.updateTodo(updateTodoInput);
+    return updateTodoInput;
   }
 
   @Mutation(() => Boolean)

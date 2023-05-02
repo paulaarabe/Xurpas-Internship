@@ -11,12 +11,6 @@ export class TodosOutput{
 
   @Field({ nullable: true })
   description: string;
-  
-  @Field({ nullable: false })
-  dateCreated: Date;
-  
-  @Field({ nullable: false })
-  dateUpdated: Date;
 
   @Field({ nullable: false, defaultValue: false })
   isCompleted: boolean;
