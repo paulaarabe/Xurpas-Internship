@@ -18,13 +18,13 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type User {
-  id: ID!
-  email: String!
-  first_name: String!
-  last_name: String!
+type UserOutput {
+  id: ID
+  email: String
+  firstName: String
+  lastName: String
   address: String!
-  user_type: String!
+  userType: String
 }
 
 type SubjectMapOutput {
@@ -41,21 +41,17 @@ type SubjectOutput {
 }
 
 type Query {
-  getTodos: TodosOutput!
-  getSubject(subjectId: Float!): SubjectOutput!
-  getallSubject: SubjectOutput!
-  getSubjectMap(subjectMapId: Float!): SubjectMapOutput!
+  todos(id: Int!): TodosEntity!
   loginUser(email: String!, password: String!): User!
 }
 
 type Mutation {
-  createSubject(createSubjectInput: CreateSubjectInput!): SubjectOutput!
-  updateSubject(subjectId: Float!, updateSubjectInput: UpdateSubjectInput!): SubjectOutput!
-  removeSubject(subjectId: Float!): SubjectOutput!
-  createSubjectMap(createSubjectMapInput: CreateSubjectMapInput!): SubjectMapOutput!
+  createTodo(createTodoInput: CreateTodoInput!): TodosOutput!
+  updateTodo(id: Int!, updateTodoInput: UpdateTodoInput!): TodosOutput!
+  deleteTodo(id: Int!): Boolean!
   registerUser(createUserData: CreateUserInput!): User!
   deleteUser(id: ID!): Boolean!
-  updateUser(id: String!, updateUserData: UpdateUserInput!): User!
+  updateUser(updateUserData: UpdateUserInput!): UserOutput!
 }
 
 input CreateSubjectInput {
@@ -86,8 +82,9 @@ input CreateUserInput {
 }
 
 input UpdateUserInput {
+  id: String
   firstName: String
   lastName: String
   address: String
-  user_type: String
+  userType: String
 }
