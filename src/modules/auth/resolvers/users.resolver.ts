@@ -1,22 +1,24 @@
+import { InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { Resolver, Mutation, Args, Query, ID } from '@nestjs/graphql';
-import { User } from '@entities/user.entity'; 
 import { CreateUserInput } from '../dtos/input/create-user.inputs'; 
 import { UpdateUserInput } from '../dtos/input/update-user.inputs';
 import { UserService } from '../services/users.service'; 
-import { InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { UserOutput } from '../dtos/output/update-user.output';
+import { UserMapper } from '../dtos/mapper/user.mapper';
 import * as bcrypt from 'bcrypt';
 
 
-@Resolver()
+
+@Resolver(()=> UserOutput)
 export class UserResolver {
   constructor(private readonly userService: UserService,) {}
 
-  @Mutation(() => User)
+  @Mutation(() => UserOutput)
   async registerUser(
     @Args('createUserData') createUserData: CreateUserInput,
-  ): Promise<User> {
+  ): Promise<UserOutput> {
     const createdUser = await this.userService.createUser(createUserData);
-    return createdUser;
+    return UserMapper.map(createdUser);
   }
 
   @Mutation(() => Boolean)
@@ -32,11 +34,11 @@ export class UserResolver {
     }
   }
 
-  @Query(() => User)
+  @Query(() => UserOutput)
   async loginUser(
     @Args('email') email: string,
     @Args('password') password: string,
-  ): Promise<User> {
+  ): Promise<UserOutput> {
     const user = await this.userService.findOneByEmail(email);
     if (!user) {
       throw new NotFoundException('Invalid email or password');
@@ -45,15 +47,14 @@ export class UserResolver {
     if (!isPasswordMatched) {
       throw new NotFoundException('Invalid email or password');
     }
-    return user;
+    return new UserOutput;
   }
 
-  @Mutation(() => User)
+  @Mutation(() => UserOutput)
   async updateUser(
-    @Args('id') id: string,
     @Args('updateUserData') updateUserData: UpdateUserInput,
-  ): Promise<User> {
-    return this.userService.updateUser(id, updateUserData);
+  ): Promise<UserOutput> {
+    return this.userService.updateUser( updateUserData);
   }
 
 }
