@@ -1,10 +1,10 @@
 import { TodosEntity } from '@entities/todos.entity';
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { DeleteResult } from 'typeorm/query-builder/result/DeleteResult';
-import { UpdateTodoInput } from '../dtos/input/update-todo.input';
-import { TodosOutput } from '../dtos/output/todos.output';
+import { UpdateTodoInput } from '../dto/output/input/update-todo.input';
+import { TodosOutput } from '../dto/output/todos.output';
 import { TodosService } from '../services/todos.service';
-import { CreateTodoInput } from '../dtos/input/create-todo.input';
+import { CreateTodoInput } from '../dto/output/input/create-todo.input';
 
 @Resolver(() => TodosOutput)
 export class TodosResolver {

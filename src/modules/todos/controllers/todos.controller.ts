@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import { CreateTodoInput } from '../dtos/input/create-todo.input';
-import { UpdateTodoInput } from '../dtos/input/update-todo.input';
+import { CreateTodoInput } from '../dto/output/input/create-todo.input';
+import { UpdateTodoInput } from '../dto/output/input/update-todo.input';
 import { TodosService } from '../services/todos.service';
 
 @Controller('todos')
