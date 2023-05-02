@@ -1,6 +1,7 @@
 import { Resolver, Mutation, Args, Query, ID } from '@nestjs/graphql';
-import { User, UserType } from '@entities/user.entity'; 
+import { User } from '@entities/user.entity'; 
 import { CreateUserInput } from '../dtos/input/create-user.inputs'; 
+import { UpdateUserInput } from '../dtos/input/update-user.inputs';
 import { UserService } from '../services/users.service'; 
 import { InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
@@ -31,11 +32,11 @@ export class UserResolver {
     }
   }
 
-  @Query(() => UserType)
+  @Query(() => User)
   async loginUser(
     @Args('email') email: string,
     @Args('password') password: string,
-  ): Promise<UserType> {
+  ): Promise<User> {
     const user = await this.userService.findOneByEmail(email);
     if (!user) {
       throw new NotFoundException('Invalid email or password');
@@ -44,8 +45,15 @@ export class UserResolver {
     if (!isPasswordMatched) {
       throw new NotFoundException('Invalid email or password');
     }
-    return user.user_type;
+    return user;
   }
 
-  
+  @Mutation(() => User)
+  async updateUser(
+    @Args('id') id: string,
+    @Args('updateUserData') updateUserData: UpdateUserInput,
+  ): Promise<User> {
+    return this.userService.updateUser(id, updateUserData);
+  }
+
 }

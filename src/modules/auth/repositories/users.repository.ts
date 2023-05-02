@@ -1,6 +1,6 @@
 import { Repository } from 'typeorm';
 import { Injectable } from "@nestjs/common";
-import { User, UserType } from '@entities/user.entity';
+import { User } from '@entities/user.entity';
 import { DataSource } from 'typeorm';
 
 
@@ -17,6 +17,4 @@ export class UserRepository extends Repository<User> {
   async findOneById(id: string): Promise<User> {
     return super.findOne({ where: { id }});
   }
-  
-
 }

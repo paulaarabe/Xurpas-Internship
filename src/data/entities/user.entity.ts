@@ -1,19 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm';
-import { ObjectType, Field, ID, registerEnumType, ResolveField } from '@nestjs/graphql';
+import { ObjectType, Field, ID } from '@nestjs/graphql';
 
-
-export enum UserType {
-  ADMIN = 'admin',
-  CUSTOMER = 'customer',
-  AGENT = 'agent',
-  USER = "user"
-}
-
-registerEnumType(UserType, {
-  name: 'UserType',
-});
-
-registerEnumType(UserType, { name: 'UserType' });
 
 @Entity({ name: 'users' })
 @ObjectType()
@@ -41,17 +28,7 @@ export class User extends BaseEntity {
   @Field()
   address: string;
 
-  @Column({
-    type: 'enum',
-    enum: UserType,
-    default: UserType.CUSTOMER,
-  })
-  @Field(() => UserType)
-  user_type: UserType;
-  
-
-  @ResolveField(() => String)
-  fullName(): string {
-    return `${this.first_name} ${this.last_name}`;
-  }
+  @Column()
+  @Field()
+  user_type: string;
 }

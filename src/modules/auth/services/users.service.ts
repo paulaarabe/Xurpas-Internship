@@ -1,10 +1,10 @@
 import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
-import { User, UserType } from '@entities/user.entity'; 
+import { User} from '@entities/user.entity'; 
 import { CreateUserInput } from '../dtos/input/create-user.inputs';
+import { UpdateUserInput } from '../dtos/input/update-user.inputs';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeleteResult, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-
 
 
 @Injectable()
@@ -26,7 +26,7 @@ export class UserService {
     return false;
   }
   return true;
-}
+  }
 
   async createUser(createUserData: CreateUserInput): Promise<User> {
     const { email, password, firstName, lastName, address, type } = createUserData;
@@ -35,25 +35,23 @@ export class UserService {
     user.first_name = firstName;
     user.last_name = lastName;
     user.address = address;
-    user.user_type = type|| UserType.CUSTOMER;
-
+    user.user_type = type;
     const userExist = await this.findOneByEmail(email);
     if (userExist){
       throw new NotFoundException('User is already exist!');
     };
-
     user.email = email;
     await user.save();
     return user;
   }
 
-  
-
-  async findOneByEmailAndPassword(
-    email: string,
-    password: string,
-  ): Promise<User> {
-    return this.userRepository.findOne({ where: { email, password }});
+  async updateUser(id: string, updateUserData: UpdateUserInput): Promise<User> {
+    const user = await this.userRepository.findOne({ where: { id }});
+    if (!user) {
+      throw new Error(`User with ID ${id} not found`);
+    }
+    Object.assign(user, updateUserData);
+    return this.userRepository.save(user);
   }
 
 }

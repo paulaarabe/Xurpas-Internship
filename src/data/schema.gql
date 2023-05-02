@@ -32,19 +32,12 @@ type User {
   first_name: String!
   last_name: String!
   address: String!
-  user_type: UserType!
-}
-
-enum UserType {
-  ADMIN
-  CUSTOMER
-  AGENT
-  USER
+  user_type: String!
 }
 
 type Query {
   todos(id: Int!): TodosEntity!
-  loginUser(email: String!, password: String!): UserType!
+  loginUser(email: String!, password: String!): User!
 }
 
 type Mutation {
@@ -53,6 +46,7 @@ type Mutation {
   deleteTodo(id: Int!): Boolean!
   registerUser(createUserData: CreateUserInput!): User!
   deleteUser(id: ID!): Boolean!
+  updateUser(id: String!, updateUserData: UpdateUserInput!): User!
 }
 
 input CreateTodoInput {
@@ -79,4 +73,11 @@ input CreateUserInput {
   lastName: String!
   address: String!
   type: String!
+}
+
+input UpdateUserInput {
+  firstName: String
+  lastName: String
+  address: String
+  user_type: String
 }
