@@ -30,7 +30,17 @@ type SubjectMapOutput {
   subjectId: Float!
 }
 
+type User {
+  id: ID!
+  email: String!
+  first_name: String!
+  last_name: String!
+  address: String!
+  user_type: String!
+}
+
 type Query {
+<<<<<<< HEAD
   getTodos: TodosOutput!
   getSubject(subjectId: Float!): SubjectOutput!
   getallSubject: SubjectOutput!
@@ -42,6 +52,19 @@ type Mutation {
   updateSubject(subjectId: Float!, updateSubjectInput: UpdateSubjectInput!): SubjectOutput!
   removeSubject(subjectId: Float!): SubjectOutput!
   createSubjectMap(createSubjectMapInput: CreateSubjectMapInput!): SubjectMapOutput!
+=======
+  todos(id: Int!): TodosEntity!
+  loginUser(email: String!, password: String!): User!
+}
+
+type Mutation {
+  createTodo(createTodoInput: CreateTodoInput!): TodosOutput!
+  updateTodo(id: Int!, updateTodoInput: UpdateTodoInput!): TodosOutput!
+  deleteTodo(id: Int!): Boolean!
+  registerUser(createUserData: CreateUserInput!): User!
+  deleteUser(id: ID!): Boolean!
+  updateUser(id: String!, updateUserData: UpdateUserInput!): User!
+>>>>>>> 9a63d1a4441a897612cbb9081111381c90d3eea6
 }
 
 input CreateSubjectInput {
@@ -53,9 +76,31 @@ input CreateSubjectInput {
 input UpdateSubjectInput {
   subjectName: String
   description: String
+<<<<<<< HEAD
   subjectStatus: String!
 }
 
 input CreateSubjectMapInput {
   subjectId: Float
+=======
+  dueDate: DateTime
+  completed: Boolean!
+}
+
+input CreateUserInput {
+  id: String!
+  email: String!
+  password: String!
+  firstName: String!
+  lastName: String!
+  address: String!
+  type: String!
+}
+
+input UpdateUserInput {
+  firstName: String
+  lastName: String
+  address: String
+  user_type: String
+>>>>>>> 9a63d1a4441a897612cbb9081111381c90d3eea6
 }

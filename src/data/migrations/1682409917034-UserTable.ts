@@ -1,6 +1,6 @@
-import { MigrationInterface,  QueryRunner, Table, TableIndex } from "typeorm"
+import { MigrationInterface, QueryRunner, Table, TableIndex } from "typeorm"
 
-export class UsersTable1681372938520 implements MigrationInterface {
+export class UserTable1682409917034 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
@@ -22,18 +22,14 @@ export class UsersTable1681372938520 implements MigrationInterface {
                   isNullable: false,
                   isUnique: true,
                 },
+                
                 {
-                  name: 'password',
-                  type: 'varchar',
-                  length: '255',
-                  isNullable: false,
+                    name: 'password',
+                    type: 'varchar',
+                    length: '255',
+                    isNullable: false,
                 },
-                {
-                  name: 'user_type',
-                  type: 'varchar',
-                  length: '255',
-                  isNullable: false,
-                },
+                
                 {
                   name: 'first_name',
                   type: 'varchar',
@@ -52,6 +48,13 @@ export class UsersTable1681372938520 implements MigrationInterface {
                   length: '255',
                   isNullable: false,
                 },
+                
+                {
+                    name: 'user_type',
+                    type: 'varchar',
+                    length: '255',
+                    isNullable: false,
+                },
               ],
             }),
           );
@@ -64,8 +67,10 @@ export class UsersTable1681372938520 implements MigrationInterface {
             }),
           );
     }
+
     public async down(queryRunner: QueryRunner): Promise<void> {
-      await queryRunner.dropIndex('users','IDX_USERS_TABLE');
-      await queryRunner.dropTable('users');
+        await queryRunner.dropIndex('users','IDX_USERS_TABLE')
+        await queryRunner.dropTable('users')
     }
+
 }
