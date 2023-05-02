@@ -29,6 +29,7 @@ type User {
 
 type SubjectMapOutput {
   id: ID
+  userId: String!
   subjectId: Float!
 }
 
@@ -70,6 +71,7 @@ input UpdateSubjectInput {
 }
 
 input CreateSubjectMapInput {
+  userId: String
   subjectId: Float
 }
 

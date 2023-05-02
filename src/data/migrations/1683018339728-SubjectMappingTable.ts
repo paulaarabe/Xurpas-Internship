@@ -1,8 +1,6 @@
-import { table } from "console";
-import { type } from "os";
-import {  MigrationInterface, QueryRunner, Table, TableIndex,TableForeignKey} from "typeorm";
+import { MigrationInterface, QueryRunner, Table, TableForeignKey, TableIndex } from "typeorm"
 
-export class SubjectMappingTable1681713107681 implements MigrationInterface {
+export class SubjectMappingTable1683018339728 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
@@ -37,16 +35,16 @@ export class SubjectMappingTable1681713107681 implements MigrationInterface {
             }),
         );
 
-        // await queryRunner.createForeignKey(
-        //     'subject_mapping',
-        //     new TableForeignKey({
-        //         name: 'FK_USER',
-        //         columnNames: ['user_id'],
-        //         referencedColumnNames: ['id'],
-        //         referencedTableName: 'users',
-        //         onDelete: 'cascade',
-        //     }), 
-        // );
+        await queryRunner.createForeignKey(
+            'subject_mapping',
+            new TableForeignKey({
+                name: 'FK_USER',
+                columnNames: ['user_id'],
+                referencedColumnNames: ['id'],
+                referencedTableName: 'users',
+                onDelete: 'cascade',
+            }), 
+        );
 
         await queryRunner.createForeignKey(
             'subject_mapping',
@@ -62,7 +60,7 @@ export class SubjectMappingTable1681713107681 implements MigrationInterface {
 
     public async down(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.dropForeignKey('subject_mapping','FK_SUBJECT');
-        // await queryRunner.dropForeignKey('subject_mapping','FK_USER');
+        await queryRunner.dropForeignKey('subject_mapping','FK_USER');
         await queryRunner.dropIndex('subject_mapping','IDX_SUBJECT_MAPPING_TABLE');
         await queryRunner.dropTable('subject_mapping');
     }
