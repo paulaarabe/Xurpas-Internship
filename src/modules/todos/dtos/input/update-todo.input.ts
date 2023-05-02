@@ -3,7 +3,7 @@ import { IsOptional } from 'class-validator';
 
 @InputType()
 export class UpdateTodoInput {
-  @Field({ nullable: true })
+  @Field({ nullable: false })
   title?: string;
 
   @Field({ nullable: true })
