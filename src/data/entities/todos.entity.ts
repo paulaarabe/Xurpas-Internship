@@ -13,7 +13,7 @@ export class TodosEntity {
   title: string;
 
   @Field() 
-  @Column()
+  @Column({ nullable: true })
   description: string;
 
   @Field()

@@ -40,7 +40,7 @@ type Mutation {
 
 input CreateTodoInput {
   title: String!
-  description: String!
+  description: String
   dateCreated: DateTime!
   dateUpdated: DateTime
   dueDate: DateTime
