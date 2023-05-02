@@ -2,14 +2,12 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type TodosEntity {
-  id: Int!
-  title: String!
-  description: String!
-  dateCreated: DateTime!
-  dateUpdated: DateTime!
+type TodosOutput {
+  id: ID
+  title: String
+  description: String
   isCompleted: Boolean!
-  dueDate: DateTime!
+  dueDate: DateTime
 }
 
 """
@@ -17,32 +15,19 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type TodosOutput {
-  id: ID
-  title: String
-  description: String
-  dateCreated: DateTime!
-  dateUpdated: DateTime!
-  isCompleted: Boolean!
-  dueDate: DateTime
-}
-
 type Query {
-  findOne(id: Float!): TodosEntity!
-  getAllTodos: [TodosEntity!]!
+  getAllTodos: [TodosOutput!]!
 }
 
 type Mutation {
   createTodo(createTodoInput: CreateTodoInput!): TodosOutput!
-  updateTodo(id: Int!, updateTodoInput: UpdateTodoInput!): TodosOutput!
+  updateTodo(updateTodoInput: UpdateTodoInput!): TodosOutput!
   deleteTodo(id: Int!): Boolean!
 }
 
 input CreateTodoInput {
   title: String!
   description: String
-  dateCreated: DateTime!
-  dateUpdated: DateTime
   dueDate: DateTime
   isCompleted: Boolean!
 }

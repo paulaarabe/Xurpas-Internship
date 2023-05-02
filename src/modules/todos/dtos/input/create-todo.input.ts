@@ -10,12 +10,6 @@ export class CreateTodoInput {
   @Field({ nullable: true })
   description: string;
 
-  @Field()
-  dateCreated: Date;
-
-  @Field({ nullable: true })
-  dateUpdated: Date;
-
   @Field({ nullable: true })
   dueDate: Date;
 

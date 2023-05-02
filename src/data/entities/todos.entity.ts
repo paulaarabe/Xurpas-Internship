@@ -1,36 +1,30 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { IsNotEmpty } from 'class-validator';
+import { title } from 'process';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@ObjectType() 
 @Entity('todos')
 export class TodosEntity {
   @Field(() => Int) 
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Field()
-  @Column()
+  @Column({name: 'title'})
   @IsNotEmpty()
   title: string;
-
-  @Field() 
-  @Column({ nullable: true })
+ 
+  @Column({ nullable: true, name: 'description' })
   description: string;
 
-  @Field()
-  @Column()
+  @Column({name: 'date_created'})
   dateCreated: Date;
 
-  @Field() 
-  @Column()
+  @Column({name: 'date_updated'})
   dateUpdated: Date;
 
-  @Field() 
-  @Column({ default: false })
+  @Column({ default: false, name: 'is_completed' })
   isCompleted: boolean;
 
-  @Field()
-  @Column({ nullable: true })
+  @Column({ nullable: true, name: 'due_date' })
   dueDate: Date; 
 }

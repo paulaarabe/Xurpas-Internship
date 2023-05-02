@@ -11,6 +11,7 @@ export class CreateTodosTable1635126173205 implements MigrationInterface {
             type: 'int',
             isPrimary: true,
             generationStrategy: 'increment',
+            isGenerated: true
           },
           {
             name: 'title',
@@ -38,7 +39,7 @@ export class CreateTodosTable1635126173205 implements MigrationInterface {
           },
           {
             name: 'due_date',
-            type: 'timestamp',
+            type: 'Date',
             isNullable: true,
           },
         ],
