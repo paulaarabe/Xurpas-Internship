@@ -33,6 +33,7 @@ import { SubjectModule } from './subject/subject.module';
     TodosModule,
     SubjectModule,
     SubjectMappingModule,
+    UserModule,
     
   ],
   providers: [
@@ -42,9 +43,10 @@ import { SubjectModule } from './subject/subject.module';
     },
   ],
 })
-export { TodosModule };
+
 export class AppModule implements NestModule{
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(CookieParserMiddleware).forRoutes('*');
   }
 }
+export { TodosModule };

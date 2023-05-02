@@ -1,6 +1,6 @@
 import { table } from "console";
 import { type } from "os";
-import {  MigrationInterface, QueryRunner, Table, TableIndex,TableForeignKey} from "typeorm"
+import {  MigrationInterface, QueryRunner, Table, TableIndex,TableForeignKey} from "typeorm";
 
 export class SubjectMappingTable1681713107681 implements MigrationInterface {
 
