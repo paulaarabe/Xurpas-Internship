@@ -4,11 +4,8 @@
 
 type TodosOutput {
   id: ID
-  title: String!
+  title: String
   description: String
-  completed: Boolean!
-  dateCreated: DateTime!
-  dateUpdated: DateTime!
   isCompleted: Boolean!
   dueDate: DateTime
 }
@@ -41,13 +38,12 @@ type SubjectOutput {
 }
 
 type Query {
-  todos(id: Int!): TodosEntity!
-  loginUser(email: String!, password: String!): User!
+  getAllTodos: [TodosOutput!]!
 }
 
 type Mutation {
   createTodo(createTodoInput: CreateTodoInput!): TodosOutput!
-  updateTodo(id: Int!, updateTodoInput: UpdateTodoInput!): TodosOutput!
+  updateTodo(updateTodoInput: UpdateTodoInput!): TodosOutput!
   deleteTodo(id: Int!): Boolean!
   registerUser(createUserData: CreateUserInput!): User!
   deleteUser(id: ID!): Boolean!
@@ -57,7 +53,8 @@ type Mutation {
 input CreateSubjectInput {
   subjectName: String
   description: String
-  subjectStatus: String!
+  dueDate: DateTime
+  isCompleted: Boolean!
 }
 
 input UpdateSubjectInput {

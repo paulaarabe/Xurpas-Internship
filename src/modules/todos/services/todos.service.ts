@@ -7,28 +7,6 @@ import { TodosRepository } from '../repositories/todos.repository';
 
 @Injectable()
 export class TodosService {
-  create(createTodoInput: CreateTodoInput) {
-    throw new Error('Method not implemented.');
-  }
-  updateTodo(arg0: number) {
-    throw new Error('Method not implemented.');
-  }
-  // update(updateTodoInput: UpdateTodoInput) {
-  //   throw new Error('Method not implemented.');
-  // }
-  findOne(arg0: { id: number; }): TodosEntity | PromiseLike<TodosEntity> {
-    throw new Error('Method not implemented.');
-  }
-  findAll() {
-    throw new Error('Method not implemented.');
-  }
-  // updateTodo(arg0: number) {
-  //   throw new Error('Method not implemented.');
-  // }
-  removeTodo(arg0: number) {
-    throw new Error('Method not implemented.');
-  }
-
   constructor(private todosRepository: TodosRepository) {}
 
   async getAllTodos(): Promise<TodosEntity[]> {
@@ -44,31 +22,11 @@ export class TodosService {
   // }
 
   async createTodo(createTodoInput: CreateTodoInput): Promise<TodosEntity> {
-    const { title, description, dueDate, isCompleted } = createTodoInput;
-
-    const todo = new TodosEntity();
-    todo.title = title;
-    todo.description = description;
-    todo.dueDate = dueDate;
-    todo.isCompleted = isCompleted;
-
-    return this.todosRepository.save(todo);
+    return await this.todosRepository.save(createTodoInput);
   }
 
-  async update(id: number, updateTodoInput: UpdateTodoInput): Promise<TodosEntity> {
-    const { title, description, dueDate, isCompleted } = updateTodoInput;
-
-    const todo = await this.todosRepository.findOne({ where: { id } });
-    if (!todo) {
-      throw new NotFoundException(`Todo with ID ${id} not found`);
-    }
-
-    todo.title = title ?? todo.title;
-    todo.description = description ?? todo.description;
-    todo.dueDate = dueDate ?? todo.dueDate;
-    todo.isCompleted = isCompleted ?? todo.isCompleted;
-
-    return this.todosRepository.save(todo);
+  async updateTodo(updateTodoInput: UpdateTodoInput): Promise<TodosEntity> {
+    return await this.todosRepository.save(updateTodoInput);
   }
 
   async delete(id: number): Promise<DeleteResult> {
