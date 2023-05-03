@@ -1,7 +1,7 @@
 import { TodosEntity } from "@entities/todos.entity";
 import { Injectable } from "@nestjs/common";
 import { DataSource, Repository } from "typeorm";
-import { CreateTodoInput } from "../dtos/input/create-todo.input";
+import { CreateTodoInput } from "../dto/output/input/create-todo.input";
 
 @Injectable()
 export class TodosRepository extends Repository<TodosEntity> {

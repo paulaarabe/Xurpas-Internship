@@ -1,8 +1,8 @@
 import { TodosEntity } from '@entities/todos.entity';
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { DeleteResult } from 'typeorm';
-import { CreateTodoInput } from '../dtos/input/create-todo.input';
-import { UpdateTodoInput } from '../dtos/input/update-todo.input';
+import { DeleteResult } from 'typeorm/query-builder/result/DeleteResult';
+import { CreateTodoInput } from '../dto/output/input/create-todo.input';
+import { UpdateTodoInput } from '../dto/output/input/update-todo.input';
 import { TodosRepository } from '../repositories/todos.repository';
 
 @Injectable()

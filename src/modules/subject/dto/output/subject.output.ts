@@ -1,20 +1,18 @@
 import { Field, ID, ObjectType } from "@nestjs/graphql";
 
 @ObjectType()
-export class TodosOutput{
+export class SubjectOutput{
     
   @Field(() => ID, { nullable: true })
-  id?: number;
+  id: number;
 
-  @Field({ nullable: true })
-  title: string;
+  @Field({ nullable: false })
+  subjectName: string;
 
   @Field({ nullable: true })
   description: string;
 
   @Field({ nullable: false, defaultValue: false })
-  isCompleted: boolean;
+  subjectStatus: string;
 
-  @Field({ nullable: true })
-  dueDate: Date; 
 }

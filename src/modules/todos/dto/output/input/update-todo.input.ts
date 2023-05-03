@@ -10,10 +10,13 @@ export class UpdateTodoInput {
   @IsOptional()
   description?: string;
 
+  @Field({ nullable: false })
+  @IsOptional()
+  completed?: boolean;
+
   @Field({ nullable: true })
   dueDate?: Date;
-
-  @Field({ nullable: false })
   isCompleted?: boolean;
+
 }
 
