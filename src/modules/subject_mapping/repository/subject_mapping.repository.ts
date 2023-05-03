@@ -10,7 +10,7 @@ export class SubjectMapRepository extends Repository<SubjectMappingEntity> {
     }
 
     async findOneById(id: number): Promise<SubjectMappingEntity> {
-        return super.findOne({ where: { id },relations:{subject:true} });
+        return super.findOne({ where: { id },relations:{subject:true,user:true} });
       }
     
       async findAll(): Promise<SubjectMappingEntity[]> {

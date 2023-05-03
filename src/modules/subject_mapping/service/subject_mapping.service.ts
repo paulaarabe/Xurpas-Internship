@@ -12,9 +12,11 @@ export class SubjectMapService{
       }
 
     async getsubjectmapId(subjectmapId:number): Promise<SubjectMappingEntity>{
-        const IDmap = this.subjectRepository.findOneById( subjectmapId );
+         const IDmap = await this.subjectRepository.findOneById( subjectmapId );
         console.log({IDmap:IDmap})
         return IDmap
     }
+
+
 
 }

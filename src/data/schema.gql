@@ -4,7 +4,7 @@
 
 type TodosOutput {
   id: ID
-  title: String
+  title: String!
   description: String
   isCompleted: Boolean!
   dueDate: DateTime
@@ -38,14 +38,19 @@ type SubjectOutput {
 }
 
 type Query {
-  getAllTodos: [TodosOutput!]!
+  getTodos: TodosOutput!
+  getSubject(subjectId: Float!): SubjectOutput!
+  getallSubject: SubjectOutput!
+  getSubjectMap(subjectMapId: Float!): SubjectMapOutput!
+  loginUser(email: String!, password: String!): UserOutput!
 }
 
 type Mutation {
-  createTodo(createTodoInput: CreateTodoInput!): TodosOutput!
-  updateTodo(updateTodoInput: UpdateTodoInput!): TodosOutput!
-  deleteTodo(id: Int!): Boolean!
-  registerUser(createUserData: CreateUserInput!): User!
+  createSubject(createSubjectInput: CreateSubjectInput!): SubjectOutput!
+  updateSubject(subjectId: Float!, updateSubjectInput: UpdateSubjectInput!): SubjectOutput!
+  removeSubject(subjectId: Float!): SubjectOutput!
+  createSubjectMap(createSubjectMapInput: CreateSubjectMapInput!): SubjectMapOutput!
+  registerUser(createUserData: CreateUserInput!): UserOutput!
   deleteUser(id: ID!): Boolean!
   updateUser(updateUserData: UpdateUserInput!): UserOutput!
 }
@@ -53,8 +58,7 @@ type Mutation {
 input CreateSubjectInput {
   subjectName: String
   description: String
-  dueDate: DateTime
-  isCompleted: Boolean!
+  subjectStatus: String!
 }
 
 input UpdateSubjectInput {
