@@ -7,7 +7,7 @@ import { CreateSubjectMapInput } from "../dto/input/subject-map.input";
 export class SubjectMapService{
     constructor(private readonly subjectRepository: SubjectMapRepository){}
 
-    async createSubjectMap(createSubjectMapInput: CreateSubjectMapInput): Promise<SubjectMappingEntity> {
+    async createSubjectMap(createSubjectMapInput: CreateSubjectMapInput): Promise<SubjectMappingEntity | any> {
         return await this.subjectRepository.save(createSubjectMapInput);
       }
 

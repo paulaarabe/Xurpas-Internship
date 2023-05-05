@@ -19,11 +19,23 @@ export class SubjectMappingTable1683018339728 implements MigrationInterface {
                         type:'uuid',
                         isNullable:false,
                     },
+                    // {
+                    //     name: 'userName',
+                    //     type: 'varchar',
+                    //     length: '255',
+                    //     isNullable: false,
+                    // },
                     {
                         name:'subject_id',
                         type:'int',
                         isNullable:false,
                     },
+                    // {
+                    //     name:'subjectName',
+                    //     type:'varchar',
+                    //     length:'255',
+                    //     isNullable:false,
+                    // },
                 ],
             }),
         );

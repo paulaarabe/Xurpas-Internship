@@ -9,7 +9,7 @@ export class SubjectMappingEntity  {
     @Column({name:'id'})
     @PrimaryGeneratedColumn('increment') 
     id: number;
-
+    
     @Column({ name: 'user_id' })
     userId: string;
     @OneToOne(

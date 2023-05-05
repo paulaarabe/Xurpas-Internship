@@ -7,7 +7,13 @@ export class SubjectMapOutput{
   id: number;
 
   @Field({ nullable: false })
+  userName: string;
+
+  @Field({ nullable: false })
   userId: string;
+
+  @Field({ nullable: false})
+  subjectName: string;
 
   @Field({ nullable: false})
   subjectId: number;

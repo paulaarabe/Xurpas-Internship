@@ -4,6 +4,8 @@ import { SubjectMappingEntity } from "@entities/subject_mapping.entity";
 import { SubjectMapService } from "../service/subject_mapping.service";
 import { CreateSubjectMapInput } from "../dto/input/subject-map.input";
 import { ValidationPipe } from "@nestjs/common";
+import { SubjectMappingMapper } from "../dto/mapper/subject-map.mapper";
+
 
 @Resolver()
 export class SubjectMapResolver{
@@ -11,7 +13,9 @@ export class SubjectMapResolver{
 
     @Query(()=>SubjectMapOutput)
     async getSubjectMap(@Args('subjectMapId')subjectmapId:number){
-      return await this.subjectmapService.getsubjectmapId(subjectmapId)
+      const ResIDMap = await this.subjectmapService.getsubjectmapId(subjectmapId)
+      // console.log ({ResIDMap:ResIDMap})
+      return SubjectMappingMapper.map(ResIDMap)
     }
     
     @Mutation(()=>SubjectMapOutput)
